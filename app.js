@@ -19,6 +19,12 @@ const catSchema = {
 
  const Cat = mongoose.model("Image", catSchema); //MODEL NAME "Image" is COLLECTION NAME in DB(mongoose turns it to 'images' - small letter plural)
 
+
+
+
+var catImage = "";
+
+
 ////////////// ROUTE ////////////////////
 
 
@@ -26,8 +32,8 @@ const catSchema = {
 app.get("/images", function(req, res){
   Cat.find(function(err, foundCat){
     if(!err){
-      res.send(foundCat);
-      console.log(foundCat[0].url)
+      catImage = foundCat[Math.floor(Math.random() * foundCat.length)].url;
+      res.render('index', {catImage:catImage});
     } else {
       console.log(err);
     }
@@ -35,20 +41,7 @@ app.get("/images", function(req, res){
 });
 
 
-
-// app.route("/images")
-
-//   .get(function(req, res){
-//     CatImage.find(function(err, foundCat){
-//       if(!err){
-//         res.send(foundCat);
-//       } else {
-//         console.log(err);
-//       }
-//     })
-//   });
-
-
+  
 
 app.listen(3000, function(){
   console.log("Listening to port 3000")
