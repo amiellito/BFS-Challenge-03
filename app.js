@@ -8,10 +8,9 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public")); //STATIC FILES LIKE "styles.css"
 
-app.use(express.static("public"));
-
-mongoose.connect("mongodb://localhost:27017/catDB", { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://admin-amiel:Test1234@alcluster.sg4dx.mongodb.net/catDB", { useNewUrlParser: true, useUnifiedTopology: true});
 
 const catSchema = {
   url: String
@@ -24,9 +23,17 @@ const catSchema = {
 
 ////////////// ROUTE ////////////////////
 
-
-
 app.get("/images", function(req, res){
+  Cat.find(function(err, foundCat){
+    if(!err){
+      res.send(foundCat[Math.floor(Math.random() * foundCat.length)]);
+    } else {
+      console.log(err);
+    }
+  });
+});
+
+app.get("/", function(req, res){
   Cat.find(function(err, foundCat){
     if(!err){
       const catImage = foundCat[Math.floor(Math.random() * foundCat.length)].url;
@@ -37,14 +44,18 @@ app.get("/images", function(req, res){
   });
 });
 
-app.post("/images", function(req, res){
+
+
+app.post("/", function(req, res){
   const newCatImage = new Cat({
     url: req.body.catUrl
   });
 
+  var newCat = newCatImage.url;
+  
   newCatImage.save(function(err){
     if(!err){
-      res.render('success.ejs')
+      res.render('success', {newCat:newCat});
     } else {
       res.send(err)
     }
@@ -52,8 +63,6 @@ app.post("/images", function(req, res){
 });
 
 
-  
-
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
   console.log("Listening to port 3000")
 });

@@ -3,18 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CAT API</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <title> The Menagerie || Cat API</title>
 </head>
 <body>
   
-  <h1>CAT API</h1>
+  <div class="container">
 
-  <img src="<%= catImage %>">
+    <div class="main-title">
+      <img class="main-image" src="img/fancy-cat.jpg">
+      <h1>The Menagerie</h1> 
+      <p> of Feline Facsimiles</p>
+    </div>
+  
+    <img class="cover" src="<%= catImage %>">
+  
+    <form action="/">
+      <button class="myButton" type="submit"><i class="fas fa-redo-alt"></i>MOAR CATS!</button>
+    </form>
 
-  <form action="/images" method="post">
-    <input type="text" placeholder="paste cat image url" name="catUrl">
-    <button type="submit">ADD CATS!</button>
-  </form>
+    <p>Have a cat pic you want to share?</p>
+  
+    <form class="submitForm" action="/" method="post">
+      <input type="text" placeholder="paste cat image url" name="catUrl">
+      <button class="myButton" type="submit"><i class="fas fa-paw"></i>ADD CATS!</button>
+    </form>
+
+  </div>
+
+
+  <script src="https://kit.fontawesome.com/0e67ce7919.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

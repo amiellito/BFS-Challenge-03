@@ -3,12 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
   <title>Success!</title>
 </head>
 <body>
   
-  <h2>Thanks for submitting!</h2>
-  <a href="/images">Go Back!</a>
+  <div class="container">
+
+    <p>Thanks for submitting!</p>
+  
+    <img class="cover" src="<%= newCat %>">
+  
+    <form action="/">
+      <button class="myButton" type="submit"><i class="fas fa-arrow-left"></i>Go Back!</button>
+    </form>
+
+  </div>
+
+  <script src="https://kit.fontawesome.com/0e67ce7919.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
