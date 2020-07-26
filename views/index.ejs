@@ -8,7 +8,13 @@
 <body>
   
   <h1>CAT API</h1>
+
   <img src="<%= catImage %>">
+
+  <form action="/images" method="post">
+    <input type="text" placeholder="paste cat image url" name="catUrl">
+    <button type="submit">ADD CATS!</button>
+  </form>
 
 </body>
 </html>

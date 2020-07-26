@@ -22,9 +22,6 @@ const catSchema = {
 
 
 
-var catImage = "";
-
-
 ////////////// ROUTE ////////////////////
 
 
@@ -32,10 +29,24 @@ var catImage = "";
 app.get("/images", function(req, res){
   Cat.find(function(err, foundCat){
     if(!err){
-      catImage = foundCat[Math.floor(Math.random() * foundCat.length)].url;
+      const catImage = foundCat[Math.floor(Math.random() * foundCat.length)].url;
       res.render('index', {catImage:catImage});
     } else {
       console.log(err);
+    }
+  });
+});
+
+app.post("/images", function(req, res){
+  const newCatImage = new Cat({
+    url: req.body.catUrl
+  });
+
+  newCatImage.save(function(err){
+    if(!err){
+      res.render('success.ejs')
+    } else {
+      res.send(err)
     }
   });
 });
